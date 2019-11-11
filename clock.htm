@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background: yellowgreen;
+        font-family: 'Microsoft Jhenghei';
+        height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  margin: 0;
+    }
+
+    #clock {
+        margin: 0 auto;
+        width: 400px;
+        height: 400px;
+        border: solid 20px rgba(0, 0, 0, .0);
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0);
+        position: relative;
+        z-index: 0;
+        vertical-align: middle;
+    }
+
+    #clock::before {
+        position: absolute;
+        content: "";
+        width: 60px;
+        height: 60px;
+        background: yellowgreen;
+        border: solid 20px black;
+        border-radius: 50%;
+        top: calc(50% - 50px);
+        left: calc(50% - 50px);
+        z-index: 10;
+    }
+
+    #hour {
+        position: absolute;
+        width: 30%;
+        height: 20px;
+        background: black;
+        background-size: cover;
+        top: calc(50% - 10px);
+        /* 3px -->指針高度除以2 */
+        left: 20%;
+        transform: rotate(90deg);
+        transform-origin: right center;
+        /* 找右邊的端點可用100%或right */
+        border-radius: 20px;
+        z-index: 3;
+
+    }
+
+    #min {
+        position: absolute;
+        width: 38%;
+        height: 20px;
+        background: black;
+        left: 12%;
+        top: calc(50% - 10px);
+        /* 3px -->指針高度除以2 */
+        transform: rotate(90deg);
+        transform-origin: right center;
+        /* 找右邊的端點可用100%或right */
+        border-radius: 20px;
+        z-index: 2;
+
+    }
+
+    #sec {
+        position: absolute;
+        background: rgba(0, 0, 0, .0);
+        width: 45%;
+        height: 10px;
+        left: 5%;
+        top: calc(50% - 3px);
+        /* 3px -->指針高度除以2 */
+        transform: rotate(90deg);
+        transform-origin: right;
+        /* 找右邊的端點可用100%或right */
+        border-radius: 3px;
+        z-index: 1;
+
+    }
+
+    #sec::after {
+        position: absolute;
+        content: "";
+        color: white;
+        font-size: 30px;
+        line-height: 80px;
+        text-align: center;
+        width: 80px;
+        height: 80px;
+        background: rgba(0, 0, 0, 0);
+        border-radius: 50%;
+        top: calc(50% - 40px);
+        left: -70px;
+        z-index: 1;
+    }
+
+    #si {
+        position: absolute;
+        display: block;
+        width: 80px;
+        height: 80px;
+        background: rgb(255, 0, 0);
+        color: rgb(255, 255, 255);
+        font-size: 30px;
+        font-weight: 800;
+        text-align: center;
+        line-height: 80px;
+        border-radius: 50%;
+        z-index: 101;
+        top: calc(50% - 40px);
+        left: -70px;
+        z-index: -2;
+
+    }
+
+    #ring {
+        margin: 0 auto;
+        width: 400px;
+        height: 400px;
+        background: rgba(145, 51, 51, 0);
+        border-radius: 50%;
+        border: solid 20px rgba(23, 94, 29, 0.0);
+        position: absolute;
+        left: -20px;
+        top: -20px;
+        z-index: 0;
+        backdrop-filter: brightness(1.0);
+        animation-name: round;
+        animation-duration: 1s;
+        animation-direction: normal;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+
+    }
+
+    @keyframes round {
+
+        from {
+            transform: rotate();
+
+        }
+
+        to {
+            transform: rotate();
+
+        }
+    }
+
+    #ring:before {
+        content: "";
+        margin: 0 auto;
+        width: 35px;
+        height: 35px;
+        background: rgb(255, 0, 0);
+        border: solid 0;
+        border-radius: 50%;
+        position: absolute;
+        left: 123px;
+        top: -19px;
+        z-index: 0;
+        filter: blur(0px);
+        animation-name: dot1;
+        animation-duration: 1s;
+        animation-direction: normal;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in;
+        animation-delay: 0.1s;
+    }
+
+    @keyframes dot1 {
+
+        from {
+            background: rgba(255, 0, 0, .5);
+        }
+
+        to {
+            background: rgba(255, 0, 0, 0.0);
+
+        }
+    }
+
+
+
+    #ring:after {
+        content: "";
+        margin: 0 auto;
+        width: 15px;
+        height: 15px;
+        background: rgb(255, 0, 0);
+        border: solid 0;
+        border-radius: 50%;
+        position: absolute;
+        left: 105px;
+        top: 1px;
+        z-index: 0;
+        filter: blur(0px);
+        animation-name: dot2;
+        animation-duration: 1s;
+        animation-direction: normal;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-out;
+        animation-delay: 0.2s;
+    }
+
+    @keyframes dot2 {
+
+        from {
+            background: rgba(255, 0, 0, 0.3);
+
+        }
+
+        to {
+            background: rgba(255, 0, 0, 0);
+
+        }
+    }
+
+
+    #time {
+
+        text-align: center;
+        font-size: 24px;
+        font-weight: 800;
+        color: white;
+        text-shadow: 0 0 2px white, 0 0 3px white;
+
+
+    }
+
+    .container {
+        width: 800px;
+        /* min-width: 320px; */
+        height: 100vh;
+        margin: 0 auto;
+        display: table;
+        vertical-align: middle;
+    }
+
+    #center {
+        width: 800PX;
+        height: 100vh;
+        margin: 0 auto;
+        vertical-align: middle;
+        display: table-cell;
+        text-align: center;
+    }
+</style>
+<span>
+    <div class="container">
+        <div id="center">
+            <div id="clock">
+                <div id="hour"></div>
+                <div id="min"></div>
+                <div id="sec"><span id="si"></span></div>
+                <div id="ring"></div>
+            </div>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>            
+            <p><span id="time"></span></p>
+        </div>
+    </div>
+    <script>
+        hour = document.getElementById("hour");
+        min = document.getElementById("min");
+        sec = document.getElementById("sec");
+        si = document.getElementById("si");
+        ring = document.getElementById("ring");
+
+        clock = () => {
+            date = new Date(); //日期函數
+            h = date.getHours();
+            m = date.getMinutes();
+            s = date.getSeconds();
+            //console.log(h+":"+m+":"+s);
+            hour.style.transform = `rotate(${h*30+90}deg)`;
+            min.style.transform = `rotate(${m*6+90}deg)`;
+            sec.style.transform = `rotate(${s*6+90}deg)`;
+            si.style.transform = `rotate(-${s*6+90}deg)`;
+            ring.style.transform = `rotate(${s*6}deg)`;
+
+            y = date.getFullYear();
+            mon = date.getMonth() + 1;
+            d = date.getDate();
+            //date.toLocalString("zh-TW");
+            si.innerText = s;
+            time.innerText = y + "年" + mon + "月" + d + "日 " + h + "點" + m + "分" + s + "秒";
+            //y+"."+m+"月"+d+"日 ● "+h+"點"+m+"分"+s+"秒";
+        }
+        clock();
+        setInterval(clock, 1000);
+        //time.innerText= date.toLocaleString("zh-tw");
+
+
+        // digi=document.getElementById("time");
+    </script>
+</span>
+
+</html>
